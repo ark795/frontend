@@ -11,6 +11,7 @@ import { Button } from "../components/ui/button";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
 import type { AddDispatch } from "../store";
+import { toast } from "sonner"
 
 export default function ProductDetailPage() {
   const { id } = useParams()
@@ -33,7 +34,12 @@ export default function ProductDetailPage() {
         </CardHeader>
         <CardContent className="space-y-6">
           <p>{product.description}</p>
-          <Button onClick={() => dispatch(addToCart(product))}>
+          <Button
+            onClick={() => {
+              dispatch(addToCart(product))
+              toast.success(`${product.title} added to cart`)
+            }}
+          >
             Add to Cart
           </Button>
         </CardContent>
